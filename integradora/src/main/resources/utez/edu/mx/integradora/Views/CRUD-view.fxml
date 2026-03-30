@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="utez.edu.mx.integradora.Controller.CRUDController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <Label text="Formulario Médico" />
+
+                <TextField fx:id="txtcurp" promptText="Ingresa el CURP" />
+                <TextField fx:id="txtnombre" promptText="Ingresa el nombre" />
+                <TextField fx:id="txtedad" promptText="Ingresa la edad" />
+                <TextField fx:id="txttelefono" promptText="Ingresa el telefono" />
+                <TextField fx:id="txtalergias" promptText="Ingresar alergias" />
+
+
+
+
+
+
+        <HBox alignment="CENTER" prefHeight="18.0" prefWidth="200.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#onAgregar" prefWidth="60" text="Agregar" />
+                <Button mnemonicParsing="false" onAction="#onActualizar" prefWidth="70" text="Actualizar" />
+                <Button mnemonicParsing="false" onAction="#onCambiarStatus" text="Cambiar Status" />
+                <Button mnemonicParsing="false" onAction="#onRecargar" prefWidth="65" text="Recargar" />
+                <Button mnemonicParsing="false" onAction="#onEliminar" prefWidth="60" text="Eliminar" />
+            </children>
+
+        </HBox>
+        <TableView fx:id="tvpacientes" prefHeight="200.0" prefWidth="400.0" />
+      <Label fx:id="contador" text="Total quiensabe" />
+      <Label fx:id="labeltxt" />
+    </children>
+</VBox>
