@@ -9,18 +9,21 @@ public class Paciente {
     private String alergias;
     private boolean status;
 
-    public Paciente(String curp, String alergias, String telefono, int edad, String nombre) {
+    public Paciente(String curp, String nombre, int edad, String telefono, String alergias, boolean status) {
         this.curp = curp;
-        this.alergias = alergias;
+        this.nombre = nombre;
         this.telefono = telefono;
         this.edad = edad;
-        this.nombre = nombre;
+        this.alergias = alergias;
         this.status = true;
     }
 
     public boolean isStatus() {
         return status;
 
+    }
+    public String getTextoStatus(){
+        return status ? "Activo" : "Inactivo";
     }
 
     public void setStatus(boolean status) {
