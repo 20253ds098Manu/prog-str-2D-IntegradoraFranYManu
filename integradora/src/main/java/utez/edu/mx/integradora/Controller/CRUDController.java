@@ -10,11 +10,17 @@ import javafx.scene.text.Text;
 import utez.edu.mx.integradora.Model.Paciente;
 import utez.edu.mx.integradora.Service.CRUDService;
 
+import java.io.IOException;
+
 public class CRUDController {
     @FXML
     private Label labeltxt;
     @FXML
-    private Label contador;
+    private Label lbltotal;
+    @FXML
+    private Label lblactivos;
+    @FXML
+    private Label lblinactivos;
     @FXML
     private TextField txtcurp;
     @FXML
@@ -50,6 +56,7 @@ public class CRUDController {
     ObservableList<Paciente> oblpaciente = FXCollections.observableArrayList();
     @FXML
     public void initialize(){
+        cargarContadores();
         //cargar las columnas
         colCurp.setCellValueFactory(new PropertyValueFactory<>("curp"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -60,14 +67,15 @@ public class CRUDController {
         oblpaciente.setAll(service.obtenerTodo());
         tvpacientes.setItems(oblpaciente);
         tvpacientes.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldselection, newselection) -> {
-            txtcurp.setText(newselection.getCurp());
-            txtnombre.setText(newselection.getNombre());
-            txttelefono.setText(newselection.getTelefono());
-            txtalergias.setText(newselection.getAlergias());
-            txtedad.setText(String.valueOf(newselection.getEdad()));
-            pacienteSeleccionado= newselection;
+            if (newselection!= null) {
+                txtcurp.setText(newselection.getCurp());
+                txtnombre.setText(newselection.getNombre());
+                txttelefono.setText(newselection.getTelefono());
+                txtalergias.setText(newselection.getAlergias());
+                txtedad.setText(String.valueOf(newselection.getEdad()));
+                pacienteSeleccionado = newselection;
+            }
         }
-
         ));
 
 
@@ -80,7 +88,7 @@ public class CRUDController {
             limpiar();
             labeltxt.setText("Paciente agregado correctamente");
             labeltxt.setStyle("-fx-text-fill: green");
-            oblpaciente.setAll(service.obtenerTodo());
+            onRecargar();
         }catch (Exception e){
             labeltxt.setText(e.getMessage());
             labeltxt.setStyle("-fx-text-fill: red");
@@ -100,12 +108,13 @@ public class CRUDController {
         txtedad.clear();
         txtnombre.clear();
         txttelefono.clear();
+        pacienteSeleccionado=null;
     }
 
     @FXML
     public void onActualizar(){
         try {
-            service.actualizar(pacienteSeleccionado.getCurp(), txtcurp.getText().trim(), txtnombre.getText(), txtedad.getText(), txttelefono.getText(), txtalergias.getText());
+            service.actualizar(pacienteSeleccionado, txtcurp.getText().trim(), txtnombre.getText(), txtedad.getText(), txttelefono.getText(), txtalergias.getText());
             limpiar();
             labeltxt.setText("Paciente actualizado correctamente");
             labeltxt.setStyle("-fx-text-fill: green");
@@ -117,14 +126,64 @@ public class CRUDController {
     }
     @FXML
     public void onCambiarStatus(){
+        try{
+            service.cambiarStatus(pacienteSeleccionado);
+            labeltxt.setText("Cambio de estatus exitoso");
+            labeltxt.setStyle("-fx-text-fill: green");
+            oblpaciente.setAll(service.obtenerTodo());
+            limpiar();
+            onRecargar();
+        }catch (Exception e){
+            labeltxt.setText(e.getMessage());
+            labeltxt.setStyle("-fx-text-fill: red");
+        }
 
     }
     @FXML
     public void onRecargar(){
         oblpaciente.setAll(service.obtenerTodo());
+        cargarContadores();
 
     }@FXML
     public void onEliminar(){
+        try{
+            if(pacienteSeleccionado==null){
+                throw new IllegalArgumentException("Seleccione un paciente a eliminar");
+            }
+            confirmarEliminacion(pacienteSeleccionado);
+            limpiar();
+            onRecargar();
+            labeltxt.setStyle("-fx-text-fill: green");
+            labeltxt.setText("Paciente Eliminado correctamente");
+        } catch (Exception e) {
+            limpiar();
+            onRecargar();
+            labeltxt.setText(e.getMessage());
+            labeltxt.setStyle("-fx-text-fill: red");
+        }
+
+
+    }
+    public boolean confirmarEliminacion(Paciente paciente) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmacion");
+        alert.setContentText("¿Estas seguro de querer eliminar permanentemente al paciente "+paciente.getNombre()+"?");
+
+        ButtonType resultado = alert.showAndWait().orElse(ButtonType.CANCEL);
+
+        if (resultado == ButtonType.OK) {
+            service.eliminar(pacienteSeleccionado);
+        }else {
+            throw new IllegalArgumentException("Accion cancelada");
+        }
+
+        return false;
+    }
+
+    public void cargarContadores(){
+        lblactivos.setText("Activos: "+String.valueOf(service.obtenerActivos()));
+        lblinactivos.setText("Inactivos: "+String.valueOf(service.obtenerInactivos()));
+        lbltotal.setText("Total: "+String.valueOf(service.obtenerTotal()));
 
     }
 

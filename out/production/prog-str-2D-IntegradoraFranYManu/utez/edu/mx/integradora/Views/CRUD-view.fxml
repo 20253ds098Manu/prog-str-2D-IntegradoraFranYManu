@@ -11,11 +11,11 @@
     <children>
         <Label text="Formulario Médico" />
 
-                <TextField fx:id="txtcurp" promptText="Ingresa el CURP" />
-                <TextField fx:id="txtnombre" promptText="Ingresa el nombre" />
-                <TextField fx:id="txtedad" promptText="Ingresa la edad" />
-                <TextField fx:id="txttelefono" promptText="Ingresa el telefono" />
-                <TextField fx:id="txtalergias" promptText="Ingresar alergias" />
+        <TextField fx:id="txtcurp" promptText="Ingresa el CURP" />
+        <TextField fx:id="txtnombre" promptText="Ingresa el nombre" />
+        <TextField fx:id="txtedad" promptText="Ingresa la edad" />
+        <TextField fx:id="txttelefono" promptText="Ingresa el telefono" />
+        <TextField fx:id="txtalergias" promptText="Ingresar alergias" />
 
 
 
@@ -29,11 +29,33 @@
                 <Button mnemonicParsing="false" onAction="#onCambiarStatus" text="Cambiar Status" />
                 <Button mnemonicParsing="false" onAction="#onRecargar" prefWidth="65" text="Recargar" />
                 <Button mnemonicParsing="false" onAction="#onEliminar" prefWidth="60" text="Eliminar" />
+                <Button mnemonicParsing="false" onAction="#onLimpiar" prefWidth="60" text="Limpiar" />
             </children>
 
         </HBox>
-        <TableView fx:id="tvpacientes" prefHeight="200.0" prefWidth="400.0" />
-      <Label fx:id="contador" text="Total quiensabe" />
-      <Label fx:id="labeltxt" />
+        <TableView fx:id="tvpacientes" prefHeight="500.0" prefWidth="400.0" >
+            <columns>
+
+                <TableColumn fx:id="colCurp" text="CURP" prefWidth="120"/>
+
+                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="140"/>
+
+                <TableColumn fx:id="colEdad" text="Edad" prefWidth="80"/>
+
+                <TableColumn fx:id="colTelefono" text="Teléfono" prefWidth="120"/>
+
+                <TableColumn fx:id="colAlergias" text="Alergias" prefWidth="140"/>
+
+                <TableColumn fx:id="colActivo" text="Status" prefWidth="100"/>
+            </columns>
+        </TableView>
+        <HBox spacing="10">
+            <children>
+                <Label fx:id="lbltotal" text="Total: 0" />
+                <Label fx:id="lblactivos" text="Activos: 0" />
+                <Label fx:id="lblinactivos" text="Inactivos: 0" />
+            </children>
+        </HBox>
+        <Label fx:id="labeltxt" />
     </children>
 </VBox>

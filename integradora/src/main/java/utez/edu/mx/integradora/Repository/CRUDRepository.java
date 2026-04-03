@@ -77,7 +77,13 @@ public class CRUDRepository {
 
         List<String> lineas = new ArrayList<>();
         for(Paciente paciente : lista) {
-            String line = paciente.getCurp() + "," + paciente.getNombre() + "," + paciente.getEdad() + "," + paciente.getTelefono() + "," + paciente.getAlergias() + ",ACTIVO" ;
+            String status;
+            if (paciente.isStatus()){
+                status = "ACTIVO";
+            }else{
+                 status = "INACTIVO";
+            }
+            String line = paciente.getCurp() + "," + paciente.getNombre() + "," + paciente.getEdad() + "," + paciente.getTelefono() + "," + paciente.getAlergias() + ","+status;
             lineas.add(line);
         }
         Files.write(path, lineas, StandardCharsets.UTF_8);

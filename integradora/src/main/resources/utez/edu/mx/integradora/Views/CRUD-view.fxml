@@ -49,7 +49,13 @@
                 <TableColumn fx:id="colActivo" text="Status" prefWidth="100"/>
             </columns>
         </TableView>
-        <Label fx:id="contador" text="Total quiensabe" />
+        <HBox spacing="10">
+            <children>
+                <Label fx:id="lbltotal" text="Total: 0" />
+                <Label fx:id="lblactivos" text="Activos: 0" />
+                <Label fx:id="lblinactivos" text="Inactivos: 0" />
+            </children>
+        </HBox>
         <Label fx:id="labeltxt" />
     </children>
 </VBox>

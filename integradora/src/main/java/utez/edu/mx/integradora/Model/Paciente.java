@@ -15,7 +15,7 @@ public class Paciente {
         this.telefono = telefono;
         this.edad = edad;
         this.alergias = alergias;
-        this.status = true;
+        this.status = status;
     }
 
     public boolean isStatus() {
@@ -23,7 +23,7 @@ public class Paciente {
 
     }
     public String getTextoStatus(){
-        return status ? "Activo" : "Inactivo";
+        return status ? "ACTIVO" : "INACTIVO";
     }
 
     public void setStatus(boolean status) {
