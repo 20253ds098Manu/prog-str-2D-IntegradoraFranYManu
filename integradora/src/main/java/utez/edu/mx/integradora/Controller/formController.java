@@ -26,6 +26,7 @@ public class formController {
         if(paciente != null){
             labeldeproceso.setText("Actualizar paciente");
             txtcurp.setText(paciente.getCurp());
+            txtcurp.setDisable(true);
             txtnombre.setText(paciente.getNombre());
             txtedad.setText(String.valueOf(paciente.getEdad()));
             txttelefono.setText(paciente.getTelefono());
