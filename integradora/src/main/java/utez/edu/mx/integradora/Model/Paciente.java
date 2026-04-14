@@ -1,14 +1,14 @@
 package utez.edu.mx.integradora.Model;
 
 public class Paciente {
-
+    //clase modelo del paciente con sus respectivos getters y setters
     private String curp;
     private String nombre;
     private int edad;
     private String telefono;
     private String alergias;
     private boolean status;
-
+    //contructor
     public Paciente(String curp, String nombre, int edad, String telefono, String alergias, boolean status) {
         this.curp = curp;
         this.nombre = nombre;
@@ -69,7 +69,7 @@ public class Paciente {
     public void setCurp(String curp) {
         this.curp = curp;
     }
-
+    //to string "inutil" que utilice para comprobar y arreglar errores
     @Override
     public String toString() {
         return "Paciente{" +

@@ -1,58 +1,69 @@
-# prog-str-2D-In# prog-str-2D-IntegradoraFranYManu
+# Directorio de Pacientes - JavaFX CRUD
 
-# Directorio de Pacientes — JavaFX CRUD
+## Descripción
 
-Sistema de escritorio para la gestión de pacientes de un consultorio médico, desarrollado como proyecto integrador para la
-asignatura de Aplicaciones de Escritorio / Programación Orientada a Objetos.
+Este proyecto es una aplicación de escritorio desarrollada en JavaFX que permite administrar un directorio de pacientes para un consultorio pequeño. El sistema permite registrar, consultar, actualizar y eliminar pacientes, además de guardar la información en un archivo local para conservar los datos entre ejecuciones.
 
-Grupo: 2°D
-Integrantes:
--Erick Manuel Guerrero Guevara
--Francisco Emmanuel Fuentes Pérez
-Tecnologías: Java 17+, JavaFX (FXML), Scene Builder.
-Persistencia: Archivo local (`.txt` / `.csv`).
+## Objetivo
 
------
+Desarrollar una aplicación con CRUD completo utilizando JavaFX, aplicando programación orientada a objetos, validaciones y persistencia en archivo.
 
-## Características (CRUD)
+## Tecnologías utilizadas
 
-El sistema permite la administración completa de pacientes con las siguientes funciones:
+Java
+JavaFX
+FXML
+Programación orientada a objetos
+Archivo .csv para persistencia
 
-1.  Alta: Registro de nuevos pacientes mediante un formulario validado.
-2.  Consulta: Visualización dinámica en un `TableView`.
-3.  Actualización: Modificación de datos existentes.
-4.  Baja Lógica (Estatus): Cambio de estado entre **ACTIVO** e **INACTIVO** (sin eliminar físicamente el registro de inmediato).
-5.  Persistencia:Los datos se guardan automáticamente en un archivo local, permitiendo que la información prevalezca al cerrar la aplicación.
+## Funcionalidades
 
------
+### CRUD de pacientes
 
-### Validaciones Implementadas
+Alta de pacientes mediante formulario
+Visualización en tabla (TableView)
+Actualización de datos
+Eliminación de pacientes
 
-Campos Obligatorios: No se permiten registros vacíos.
-Nombre: Mínimo 5 caracteres.
-Edad: Rango lógico de 0 a 120 años.
-Teléfono: Únicamente dígitos (mínimo 10).
-CURP Único:Validación para evitar duplicados en el sistema.
+### Persistencia en archivo
 
-### Funcionalidad Extra
+Los datos se guardan en un archivo .csv
+Al iniciar el programa se cargan automáticamente
+Cada cambio actualiza el archivo
 
-Resumen en Tiempo Real: Contador automático en la pantalla principal que muestra:
-* Total de registros.
-* Pacientes Activos.
-* Pacientes Inactivos.
+### Validaciones
 
------
+No permite campos vacíos
+CURP única sin duplicados
+Nombre mínimo 5 caracteres
+Edad entre 0 y 120
+Teléfono de 10 dígitos
 
-## Estructura del Proyecto (POO)
+### Funcionalidades extra
 
-El proyecto sigue una estructura organizada basada en responsabilidades:
+Estatus de paciente ACTIVO / INACTIVO
+Contadores en pantalla de total, activos e inactivos
 
-`model`: Clase `Paciente` con sus atributos y encapsulamiento.
-`controller`: Controladores de la interfaz (MainController, FormController).
-`service` / `repository`: Lógica de gestión de datos y manejo de lectura/escritura de archivos (I/O).
-`view`: Archivos `.fxml` y hojas de estilo `.css`.
+## Interfaz
 
+### Pantalla principal
 
+Tabla de pacientes
+Botones de nuevo, cambiar status, eliminar y recargar
+Contadores de pacientes
+
+### Formulario
+
+Campos de CURP, nombre, edad, teléfono y alergias
+Botones de guardar y cancelar
+
+## Estructura del proyecto
+
+Model: Paciente.java
+Repository: CRUDRepository.java
+Service: CRUDService.java
+Controller: CRUDController.java y formController.java
+Views: CRUD-view.fxml y formview.fxml
 
 ##  Ejecución del Proyecto
 
@@ -62,12 +73,24 @@ El proyecto sigue una estructura organizada basada en responsabilidades:
 3.  Configurar JavaFX: Asegúrate de tener configuradagits las librerías de JavaFX y los módulos correspondientes.
 4.  Correr la clase: `Main.java` o `App.java`.
 
------
+## Archivo de datos
 
-##  Git Flow Utilizado
+El sistema utiliza un archivo .csv ubicado en integradora/data/pacientes.csv
+Este archivo se crea automáticamente si no existe
 
-Para el desarrollo de este proyecto se siguió el siguiente flujo de trabajo:
 
-1.  `main`: Rama de producción (entrega final).
-2.  `dev`: Rama de integración de funciones.
-3.  `ramas-personales`: Trabajo individual de cada integrante antes del merge a `dev`.tegradoraFranYManu
+## Equipo
+
+Integrante 1: Francisco Emmanuel Fuentes Pérez
+
+Integrante 2: Erick Manuel Guerrero Guevara
+
+## Notas
+
+No se utiliza base de datos
+Los datos se conservan al reiniciar
+Se aplican validaciones y manejo de errores con try/catch
+
+## Conclusión
+
+Este proyecto permitió aplicar conceptos de JavaFX, manejo de archivos y programación orientada a objetos para construir un sistema funcional de gestión de pacientes
